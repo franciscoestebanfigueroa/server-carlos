@@ -4,6 +4,7 @@ import { Arguments } from "yargs";
 import { argumentos } from "./yargs_plugins";
 import { file} from "./file_plugins";
 import { buildLoger } from "./winston_plugins";
+import { cron } from "./cron";
 
 (async()=>{
   await main();
@@ -50,4 +51,7 @@ function main(){
       logg.error('no se pudo inicializar server en el puerto '+port)
     }
 
+    cron.execute("1 * * * * *",()=>{
+      console.log('verificando conexion..'+new Date().toISOString())
+    }).start();
 }

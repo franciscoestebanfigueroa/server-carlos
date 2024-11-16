@@ -26,6 +26,9 @@ export class serverHttp{
              
              client.on('event', (data:any) => { 
              });
+             client.on('event',function(data:any    ){console.log('data ==> ',data)})    
+
+
            client.on('disconnect', () => { console.log('desconectado io')});
          });
          

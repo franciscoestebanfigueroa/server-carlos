@@ -53,5 +53,5 @@ function main(){
 
     cron.execute("1 * * * * *",()=>{
       console.log('verificando conexion..'+new Date().toISOString())
-    }).start();
+    }).stop();
 }

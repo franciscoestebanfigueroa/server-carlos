@@ -16,7 +16,7 @@
 
         })
        
-        
+        socket.on('mensaje',function(mensaje){console.log(mensaje)})
         socket.on('disconnect',function(){
             console.log('se desconecto del servidor')
         })

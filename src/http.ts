@@ -3,6 +3,7 @@ import { file } from "./file_plugins";
 import { buildLoger } from "./winston_plugins";
 import express = require('express')
 import path = require("path");
+import { cron } from "./cron";
 
 export class serverHttp{
 
@@ -27,7 +28,10 @@ export class serverHttp{
              client.on('event', (data:any) => { 
              });
              client.on('event',function(data:any    ){console.log('data ==> ',data)})    
-
+             cron.execute(("1 * * * * *"),()=>{
+                io.emit('mensaje','dato enviado del serevidor '+ new Date().toISOString())
+                console.log('enviando data')
+             }).start()
 
            client.on('disconnect', () => { console.log('desconectado io')});
          });

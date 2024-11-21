@@ -5,6 +5,7 @@ import { argumentos } from "./yargs_plugins";
 import { file} from "./file_plugins";
 import { buildLoger } from "./winston_plugins";
 import { cron } from "./cron";
+import { websk } from "./ws";
 
 (async()=>{
   await main();
@@ -41,15 +42,19 @@ function main(){
     return
   }
 
+/*
+if(serverHttp.execute(port)){
+  console.log('servidor encendido en el puerto '+ port)
+  logg.log('servidor encendido en puerto '+port);
+}
+else{
+  console.log(" no se pudo encender el servidor ver los log..node -l")
+logg.error('no se pudo inicializar server en el puerto '+port)
+}
+*/
 
-  if(serverHttp.execute(port)){
-    console.log('servidor encendido en el puerto '+ port)
-    logg.log('servidor encendido en puerto '+port);
-    }
-    else{
-      console.log(" no se pudo encender el servidor ver los log..node -l")
-      logg.error('no se pudo inicializar server en el puerto '+port)
-    }
+websk(port);
+console.log('servidor encendido en el puerto '+ port)
 
     cron.execute("1 * * * * *",()=>{
       console.log('verificando conexion..'+new Date().toISOString())

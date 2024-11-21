@@ -9,11 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const http_1 = require("./http");
 const yargs_plugins_1 = require("./yargs_plugins");
 const file_plugins_1 = require("./file_plugins");
 const winston_plugins_1 = require("./winston_plugins");
 const cron_1 = require("./cron");
+const ws_1 = require("./ws");
 (() => __awaiter(void 0, void 0, void 0, function* () {
     yield main();
 }))();
@@ -40,15 +40,19 @@ function main() {
         // console.log(file.read_archive_config("./config"))
         return;
     }
-    if (http_1.serverHttp.execute(port)) {
-        console.log('servidor encendido en el puerto ' + port);
-        logg.log('servidor encendido en puerto ' + port);
+    /*
+    if(serverHttp.execute(port)){
+      console.log('servidor encendido en el puerto '+ port)
+      logg.log('servidor encendido en puerto '+port);
     }
-    else {
-        console.log(" no se pudo encender el servidor ver los log..node -l");
-        logg.error('no se pudo inicializar server en el puerto ' + port);
+    else{
+      console.log(" no se pudo encender el servidor ver los log..node -l")
+    logg.error('no se pudo inicializar server en el puerto '+port)
     }
+    */
+    (0, ws_1.websk)(port);
+    console.log('servidor encendido en el puerto ' + port);
     cron_1.cron.execute("1 * * * * *", () => {
         console.log('verificando conexion..' + new Date().toISOString());
-    }).start();
+    }).stop();
 }

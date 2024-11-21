@@ -29,7 +29,7 @@ export class serverHttp{
              });
              client.on('event',function(data:any    ){console.log('data ==> ',data)})    
              cron.execute(("1 * * * * *"),()=>{
-                io.emit('mensaje','dato enviado del serevidor '+ new Date().toISOString())
+                io.emit('mensaje','{nombre:pancho}')
                 console.log('enviando data')
              }).start()
 

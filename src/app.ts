@@ -58,5 +58,6 @@ console.log('servidor encendido en el puerto '+ port)
 
     cron.execute("1 * * * * *",()=>{
       console.log('verificando conexion..'+new Date().toISOString())
+      
     }).stop();
 }

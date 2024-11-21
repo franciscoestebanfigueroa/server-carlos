@@ -3,6 +3,7 @@ import { readFileSync } from 'fs';
 import { WebSocketServer } from 'ws';
 import path from 'path';
 import express from 'express'
+import { cron } from './cron';
 
 
 
@@ -29,9 +30,15 @@ export const websk =(port:number)=>{
               }
             });
           });
-
-        
-        ws.send('conectado..');
+          
+          ws.send('conectado..');
+          cron.execute(( "*/5 * * * * *"),()=>{
+            wss.clients.forEach(function each(client) {
+              if (client.readyState === 1) {
+                client.send("{x:10,y:20,z:30}");
+              }
+            });
+          }).start();
     });
     
     server.listen(port);
